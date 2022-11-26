@@ -1,0 +1,38 @@
+<% if user_signed_in? %>
+
+  <table class='table table-striped table-bordered table-hover'>
+    <thead class='thead-dark'>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Twitter</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+   
+    <tbody>
+      <% @friends.each do |friend| %>
+        <tr>
+          <td><%= link_to friend.first_name + ' ' + friend.last_name, friend %></td>
+          <td><%= friend.email %></td>
+          <td><%= friend.phone %></td>
+          <td>@<%= friend.twitter %></td>
+          <td><%= link_to "Delete", friend, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this friend" }, class: "btn btn-danger btn-sm" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+   
+  <br>
+   
+  <%= link_to "New Friend", new_friend_path, class:'btn btn-dark' %>
+
+<% else %>
+
+  <h1>Home Page</h1>
+  </br>
+  <p>This website is an example website made by following a ruby on rails tutorial on <a href="https://codemy.com/">Codemy</a> with some changes made.<p>
+  <p>The Root Page (root 'home#index') in the routes</p>
+
+<% end %>
